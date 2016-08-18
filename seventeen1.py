@@ -45,27 +45,28 @@ def gameplay():
 	game = 0
 	p1_wins = 0
 	p2_wins = 0
-	for n in range(total_games):
-		marbles_left = 17
-		print('Game #{}. Play sequence: '.format(game + 1), end=" ")
-		while marbles_left != 0:
-			p1_choice = player1(lst, n, 0, marbles_left)
-			marbles_left -= p1_choice
-			if marbles_left == 0:
-				print(str(p1_choice) + '. Winner: P2')
-				p2_wins += 1
-				break
-			else:
-				print(str(p1_choice) + '-', end=" ")
-			p2_choice = player2(marbles_left)
-			marbles_left -= p2_choice
-			if marbles_left == 0:
-				print(str(p2_choice) + ', Winner: P1')
-				p2_wins += 1
-				break
-			else:
-				print(str(p2_choice) + '-', end=" ")
-	print('Player 1 won {} times; Player 2 won {} times'.format(p1_wins, p2_wins))
+	with open('i206_placein_output2_<anna.cho>.txt', 'w') as fout:
+		for n in range(total_games):
+			marbles_left = 17
+			fout.write('Game #{}. Play sequence: '.format(game + 1))
+			while marbles_left != 0:
+				p1_choice = player1(lst, n, 0, marbles_left)
+				marbles_left -= p1_choice
+				if marbles_left == 0:
+					fout.write(str(p1_choice) + '. Winner: P2\n')
+					p2_wins += 1
+					break
+				else:
+					fout.write(str(p1_choice) + '-')
+				p2_choice = player2(marbles_left)
+				marbles_left -= p2_choice
+				if marbles_left == 0:
+					fout.write(str(p2_choice) + ', Winner: P1\n')
+					p2_wins += 1
+					break
+				else:
+					fout.write(str(p2_choice) + '-')
+		fout.write('Player 1 won {} times; Player 2 won {} times'.format(p1_wins, p2_wins))
 
 # At the end of all the games, the program will print the number of games won by each player. 
 
